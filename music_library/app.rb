@@ -1,13 +1,25 @@
 # file: spec/spec_helper.rb
 
 require_relative 'lib/database_connection'
+require_relative 'lib/artist_repository'
+require_relative 'lib/album_repository'
 
-# Make sure this connects to your test database
-# (its name should end with '_test')
-DatabaseConnection.connect('music_library_3')
+# We need to give the database name to the method `connect`.
+DatabaseConnection.connect('music_library_test')
 
-result = DatabaseConnection.exec_params('SELECT * FROM artists;', [])
+# Perform a SQL query on the database and get the result set.
+album_repository = AlbumRepository.new
+artist_repository = ArtistRepository.new
 
-result.each do |record|
-  p record
-end
+p album = album_repository.find(2)
+p artist = artist_repository.find(2)
+
+# Print out each record from the result set .
+
+# album_repository.each do |album|
+#   p album.title
+# end
+
+# artist_repository.each do |artist|
+#   p artist
+# end
