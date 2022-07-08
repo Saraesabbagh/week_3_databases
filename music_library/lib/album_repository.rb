@@ -4,10 +4,9 @@ require 'pg'
 
 class AlbumRepository
     def all
-        albums = []
-        sql = 'SELECT id, title, release_year, artist_id FROM albums'
+        sql = 'SELECT id, title, release_year, artist_id FROM albums;'
         result_set = DatabaseConnection.exec_params(sql, [])
-
+        albums = []
         result_set.each do |record|
             album = Album.new
             album.id = record['id'].to_i
